@@ -12,8 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('members', function (Blueprint $table) {
-            $table->id();
+            $table->integer('member_id');
+            $table->string('academic_degree', 50);
             $table->timestamps();
+
+            $table->foreign('member_id')->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('member_id')->references('member_id')
+                ->on('reports_sections')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
         });
     }
 

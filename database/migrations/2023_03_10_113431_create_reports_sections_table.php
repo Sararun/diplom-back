@@ -12,8 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reports_sections', function (Blueprint $table) {
-            $table->id();
+            $table->id('section_id')->autoIncrement();
+            $table->string('name', '50');
+            $table->integer('member_id');
+            $table->dateTime('time_start', 0);
             $table->timestamps();
+
+            $table->foreign('section_id')->references('section_id')
+                ->on('sections_conferences')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

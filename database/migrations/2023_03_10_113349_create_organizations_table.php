@@ -12,8 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('organizations', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
+            $table->string('name');
+            $table->string('address');
+            $table->integer('post_index');
+            $table->integer('organizers_id');
             $table->timestamps();
+
+            $table->foreign('organizers_id')->references('organizers_id')
+                ->on('organizers')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
         });
     }
 

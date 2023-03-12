@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('organizers', function (Blueprint $table) {
-            $table->id();
+            $table->integer('organizers_id');
+            $table->string('organization_name', 50);
             $table->timestamps();
+            $table->foreign('organizers_id')->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 
