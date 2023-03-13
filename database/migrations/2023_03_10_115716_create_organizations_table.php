@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->integer('post_index');
-            $table->integer('organizers_id');
+            $table->unsignedBigInteger('organizers_id');
             $table->timestamps();
 
             $table->foreign('organizers_id')->references('organizers_id')

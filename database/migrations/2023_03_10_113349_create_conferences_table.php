@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('conferences', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('name', 50)->unique();
-            $table->integer('organizers_id');
+            $table->unsignedBigInteger('organizers_id');
             $table->string('location', 50);
             $table->date('start_date');
             $table->date('end_date');

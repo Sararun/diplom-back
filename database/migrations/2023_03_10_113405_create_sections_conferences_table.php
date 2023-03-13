@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reports_sections', function (Blueprint $table) {
-            $table->id('section_id')->autoIncrement();
-            $table->string('name', '50');
-            $table->integer('member_id');
-            $table->dateTime('time_start', 0);
+        Schema::create('sections_conferences', function (Blueprint $table) {
+            $table->unsignedBigInteger('section_id')->autoIncrement();
+            $table->string('name', 50);
+            $table->unsignedBigInteger('conference_id');
+            $table->date('date_of_start');
             $table->timestamps();
 
-            $table->foreign('section_id')->references('section_id')
-                ->on('sections_conferences')
+            $table->foreign('conference_id')->references('id')
+                ->on('conferences')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reports_sections');
+        Schema::dropIfExists('sections_conferences');
     }
 };

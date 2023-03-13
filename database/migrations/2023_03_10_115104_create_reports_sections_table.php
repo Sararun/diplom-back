@@ -11,21 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
-            $table->integer('member_id');
-            $table->string('academic_degree', 50);
+        Schema::create('reports_sections', function (Blueprint $table) {
+            $table->id('section_id')->autoIncrement();
+            $table->string('name', '50');
+            $table->unsignedBigInteger('member_id');
+            $table->dateTime('time_start', 0);
             $table->timestamps();
 
-            $table->foreign('member_id')->references('id')
-                ->on('users')
+            $table->foreign('section_id')->references('section_id')
+                ->on('sections_conferences')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
             $table->foreign('member_id')->references('member_id')
-                ->on('reports_sections')
+                ->on('members')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-
         });
     }
 
@@ -34,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('reports_sections');
     }
 };
